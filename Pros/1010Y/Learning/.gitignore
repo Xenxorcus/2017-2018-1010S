@@ -1,0 +1,11 @@
+*.o
+*.jar
+FastBot/bin/output.elf
+*.bin
+FastBot/firmware/libpros.a
+FastBot/Makefile
+*.pros
+FastBot/firmware/STM32F10x.ld
+*.ld
+FastBot/include/API.h
+FastBot/common.mk

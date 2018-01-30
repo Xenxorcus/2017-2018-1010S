@@ -348,6 +348,8 @@ void intSensor (){
 		wait1Msec(time);
 	}
 
+
+// joysticker code
 	void driveBase(){
 		motor[RFront] = motor[RBack] = vexRT(Ch2) - vexRT(Ch1);//combine Right Motors all forward.
 		motor[LBack] = motor[LFront] = vexRT(Ch2) + vexRT(Ch1);//combine Left Motors all forward.

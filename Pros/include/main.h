@@ -57,8 +57,31 @@ extern "C" {
  #define Drive_LF 3
  #define Drive_RB 4
  #define Drive_LB 5
- #define MogoR 6
- #define MogoL 7
+ #define Drive_RT 6
+ #define Drive_LT 7
+ #define MogoR 8
+ #define MogoL 9
+
+ //Sensor Ports(Digital)
+ #define QuadR_Top 1
+ #define QuadR_Bottom 2
+ #define QuadL_Top 5
+ #define QuadL_Bottom 6
+ Encoder encoderL;
+ Encoder encoderR;
+
+ //Sensor Ports(Analog)
+ #define Gyro 2
+ Gyro gyro;
+
+ #define Line_Tracker 1
+ #define Drive_RB 2
+ #define Drive_LB 3
+
+ #define MOGOPOT 3
+
+ int myauto;
+
 void autonomous();
 /**
  * Runs pre-initialization code. This function will be started in kernel mode one time while the

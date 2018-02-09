@@ -17,4 +17,6 @@ void mogoOut(int timeout);
 
 void mogoScore();
 
+void mogoTwenty(int direction, int target);
+
 void LineTrack();

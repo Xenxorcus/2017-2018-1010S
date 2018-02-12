@@ -10,7 +10,12 @@
  * obtained from http://sourceforge.net/projects/freertos/files/ or on request.
  */
 
-#include "main.h"
+ #include "main.h"
+ #include "autofunctions.h"
+ #include "lcdfunctions.h"
+ #include "drive.h"
+ #include "mogo.h"
+
 
 /*
  * Runs the user operator control code. This function will be started in its own task with the
@@ -29,24 +34,87 @@
  *
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
-int joystickGetAnalog(
-		unsigned char joystick, // the joystick slot to check(1 for master, 2 for partner)
-		unsigned char axis // One for the joystick channels on a Vex joystick: 1, 2, 3, 4, ACCEL_X, or A
-)
-
-void MotorSet {
-		unsigned char channel, // motor channel to set from 1-10
-		int speed				//new signed speed. -127 is full reverse, 127 full toward, 0 off
-}
 
 void operatorControl() {
-	int speed;
-	int turn;
-		while (1) {
-		power = joystickGetAnalog(1,2); // vertical axis on left joystick,
-		turn = joystickeGetAnalog(1,1);
-		MotorSet(2, power + turn);  // set left wheels
-		MotorSet(3, power - turn);
-		delay(20);
-	}
-}
+
+	gyroReset(gyro);
+	analogCalibrate(rLine_Tracker);
+	analogCalibrate(lLine_Tracker);
+	analogCalibrate(mLine_Tracker);
+	analogCalibrate(MOGOPOT);
+
+	while (1) {
+
+		//LCD Task
+	int mgCurrent = analogRead(MOGOPOT);
+	lcdPrint(uart1, 1, "mg%d", mgCurrent);
+
+		//***********************
+		//       Tank Drive
+		//***********************
+
+		int Y1 = 0; //Y-Axis on Tank
+		int Y2 = 0;
+		int deadZone = 10; //Deadzone Value // Was 20
+
+		int leftStickVertical = joystickGetAnalog(1, 3); //Joystick command for vertical movement
+		int rightStickVertical = joystickGetAnalog(1, 2); //Joystick command for horizontal movement
+
+		if (abs (leftStickVertical) > deadZone) {
+			Y1 = leftStickVertical; }
+		else {
+			Y1 = 0;
+		}
+		if (abs (rightStickVertical) > deadZone) {
+			Y2 = rightStickVertical; }
+		else {
+			Y2 = 0;
+		}
+
+		//Left Drive
+		motorSet(Drive_LB, Y1);//Left Front
+		motorSet(Drive_LB, Y1);//Left Back
+		motorSet(Drive_LT, Y1);//left Top
+
+		//Right Drive
+		motorSet(Drive_RB, Y2);//Right Front
+		motorSet(Drive_RF, Y2);//Right Back
+		motorSet(Drive_RT, Y2);
+
+		// Mogo Intake
+		bool mogoUp = joystickGetDigital(1,5,JOY_UP);
+		bool mogoDown = joystickGetDigital(1,5,JOY_DOWN);
+		bool mogoScore = joystickGetDigital(1,6,JOY_DOWN);
+		bool mogoSafe = joystickGetDigital(1,6,JOY_UP);
+		int stop;
+		//Mobile Goal In
+		if (mogoUp == 1 && mogoDown == 0 && mogoScore == 0 && mogoSafe == 0){
+			MoveMogo(-90);
+			stop = 1;
+		}
+		//Mobile Goal Out
+		else if (mogoUp == 0 && mogoDown == 1 && mogoScore == 0 && mogoSafe == 0){
+			MoveMogo(90);
+			stop = 0;
+		}
+		else if(mogoUp == 0 && mogoDown == 0 && stop==1 && mogoScore == 0 && mogoSafe == 0){
+			MoveMogo(-25);
+		}
+		//Preset for scoring with cones (Out)
+		else if(mogoUp == 0 && mogoDown == 0 && mogoScore == 0 && mogoSafe == 0){
+			//TaskHandle mogoScore = taskCreate(mogoScore, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+			stop=0;
+		}
+		else {
+			MoveMogo(0);
+		}
+		if(mogoScore == 1){
+			if(analogRead(MOGOPOT)<1100){
+				MoveMogo(90);}
+			}//end if
+		if (mogoSafe == 1) {
+			if(analogRead(MOGOPOT)>1100){
+				MoveMogo(-90);}
+			}//end if
+		}//end while (1)
+	}//end void operatorControl()

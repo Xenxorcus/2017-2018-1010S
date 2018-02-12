@@ -1,4 +1,4 @@
-#include "mian.h"
+#include "main.h"
 
 void MoveMogo(int speed){
 

@@ -63,22 +63,21 @@ extern "C" {
  #define MogoL 9
 
  //Sensor Ports(Digital)
+ Encoder encoderL;
+ Encoder encoderR;
  #define QuadR_Top 1
  #define QuadR_Bottom 2
  #define QuadL_Top 5
  #define QuadL_Bottom 6
- Encoder encoderL;
- Encoder encoderR;
 
  //Sensor Ports(Analog)
- #define Gyro 2
  Gyro gyro;
+ #define Gyro 4
 
- #define Line_Tracker 1
- #define Drive_RB 2
- #define Drive_LB 3
-
- #define MOGOPOT 3
+ #define rLine_Tracker 1
+ #define lLine_Tracker 2
+ #define mLine_Tracker 3
+ #define MOGOPOT 5
 
  int myauto;
 

@@ -26,5 +26,66 @@
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
+ void noauto() {
+
+ }
+
+void skills(){
+
+}
+
+void mobileleftred() {
+
+}
+
+void mobilerightblue(){
+
+}
+
+void 
 void autonomous() {
+
+switch(myauto){
+
+    case -1:
+    noauto();
+    break;
+
+    case 0:
+    skills();
+    break;
+
+    case 1:
+    mobileleftred();
+    break;
+
+    case 2:
+    mobilerightblue();
+    break;
+
+    case 3:
+    mobilerightred();
+    break;
+
+    case 4:
+    mobileleftblue();
+    break;
+
+    case 5:
+    stationarygoalred();
+    break;
+
+    case 6:
+    stationarygoalblue();
+    break;
+
+    case 7:
+    pointred();
+    break;
+
+    case 8:
+    pointblue();
+    break;
+
+ }
 }

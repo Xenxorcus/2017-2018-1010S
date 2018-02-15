@@ -64,6 +64,17 @@ extern "C" {
 #define TowerR 8//combine two HS motors together
 #define TowerL 9//combine two HS motors together
 
+//Sensor Ports(Digital)
+ Encoder encoderL;
+ Encoder encoderR;
+ #define QuadR_Top 1
+ #define QuadR_Bottom 2
+ #define QuadL_Top 3
+ #define QuadL_Bottom 4
+
+ //Sensor Ports(Analog)
+ #define MOGOPOT 1
+ 
 void autonomous();
 /**
  * Runs pre-initialization code. This function will be started in kernel mode one time while the

@@ -45,7 +45,9 @@ void operatorControl() {
 
 	while (1) {
 
-		//LCD Task
+   //LCD Task
+   TaskHandle opcontrollcd_task = taskCreate(opcontrollcd, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 	int mgCurrent = analogRead(MOGOPOT);
 	lcdPrint(uart1, 1, "mg%d", mgCurrent);
 

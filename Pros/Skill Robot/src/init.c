@@ -37,4 +37,21 @@ void initializeIO() {
  * can be implemented in this task if desired.
  */
 void initialize() {
+  //LED Program
+pinMode(12, OUTPUT);
+digitalWrite(12, HIGH);
+
+//Initialize Encoders (Drive and Arm)
+encoderR = (encoderInit(1, 2, false));
+encoderL = (encoderInit(3, 4, false));
+
+//Initialize Gyro
+gyro = (gyroInit(5, 0));
+
+//Initialize LCD Screen
+lcdInit(uart1);
+lcdClear(uart1);
+
+//Handle Task Disable LCD
+TaskHandle disablelcd_task = taskCreate(disablelcd, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }

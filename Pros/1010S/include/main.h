@@ -51,6 +51,19 @@ extern "C" {
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
+
+ // Motor Ports
+#define RClaw 1
+#define LClaw 10
+#define Drive_RF 2
+#define Drive_LF 3
+#define MogoR 4
+#define MogoL 5
+#define Drive_RB 6
+#define Drive_LB 7
+#define TowerR 8//combine two HS motors together
+#define TowerL 9//combine two HS motors together
+
 void autonomous();
 /**
  * Runs pre-initialization code. This function will be started in kernel mode one time while the

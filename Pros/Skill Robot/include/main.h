@@ -53,31 +53,30 @@ extern "C" {
  */
 
  // Motor Ports
- #define Drive_RF 2
- #define Drive_LF 3
- #define Drive_RB 4
- #define Drive_LB 5
+ #define Drive_LF 2
+ #define Drive_RF 3
+ #define Drive_LB 4
+ #define Drive_RB 5
  #define Drive_RT 6
  #define Drive_LT 7
- #define MogoR 8
- #define MogoL 9
+ #define Mogo 8
 
  //Sensor Ports(Digital)
  Encoder encoderL;
  Encoder encoderR;
  #define QuadR_Top 1
  #define QuadR_Bottom 2
- #define QuadL_Top 5
- #define QuadL_Bottom 6
+ #define QuadL_Top 3
+ #define QuadL_Bottom 4
 
  //Sensor Ports(Analog)
  Gyro gyro;
- #define Gyro 4
+ #define Gyro 5
 
  #define rLine_Tracker 1
  #define lLine_Tracker 2
  #define mLine_Tracker 3
- #define MOGOPOT 5
+ #define MOGOPOT 4
 
  int myauto;
 

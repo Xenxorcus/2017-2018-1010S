@@ -192,7 +192,7 @@ task usercontrol()
 
 		}
 
-	// This is the main execution loop for the user control program.
+		// This is the main execution loop for the user control program.
 		// Each time through the loop your program should update motor + servo
 		// values based on feedback from the joysticks.
 
